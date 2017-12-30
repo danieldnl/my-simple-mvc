@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\":"core/"
+        },
+        "files": [
+            "core/helpers/session_helper.php",
+            "core/helpers/url_helper.php",
+            "core/helpers/aux_helper.php"
+        ]
+    }
+}
