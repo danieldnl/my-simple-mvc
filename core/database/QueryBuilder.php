@@ -18,20 +18,26 @@ use PDO;
 */
 class QueryBuilder
 {
-    private $connection = DB_CONNECTION;
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $dbname = DB_NAME;
+    private $connection;
+    private $host;
+    private $user;
+    private $pass;
+    private $dbname;
 
     private $dbh;
     private $stmt;
 
     public function __construct()
     {
+        $this->connection = $database['DB_CONNECTION'];
+        $this->host = $database['DB_HOST'];
+        $this->user = $database['DB_USER'];
+        $this->pass = $database['DB_PASS'];
+        $this->dbname = $database['DB_NAME'];
+
         //Set DSN
         $dsn = "{$this->connection}:host={$this->host};dbname={$this->dbname}";
-        $options = [ PDO::ATTR_PERSISTENT => true,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ];
+        $options = [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
         //Create PDO Instance
         try {
@@ -48,7 +54,7 @@ class QueryBuilder
     }
 
     //Bind values
-    public function bind($param, $value, $type=null)
+    public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
             switch (true) {
@@ -83,6 +89,7 @@ class QueryBuilder
     public function resultSet()
     {
         $this->execute();
+
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -90,6 +97,7 @@ class QueryBuilder
     public function single()
     {
         $this->execute();
+
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 

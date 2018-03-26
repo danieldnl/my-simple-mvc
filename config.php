@@ -1,11 +1,15 @@
 <?php
 
 //DB Params
-define('DB_HOST', 'localhost');
-define('DB_CONNECTION', 'mysql');
-define('DB_NAME', 'shareposts');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
+$databases = [
+    'bd1' => [
+        'DB_HOST' => 'localhost',
+        'DB_CONNECTION' => 'mysql',
+        'DB_NAME' => 'shareposts',
+        'DB_USER' => 'root',
+        'DB_PASS' => 'root',
+    ],
+];
 
 //App Root
 define('APPROOT', dirname(__FILE__).'/app');
