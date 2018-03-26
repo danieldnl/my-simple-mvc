@@ -8,13 +8,16 @@ define('DB_USER', 'root');
 define('DB_PASS', 'root');
 
 //App Root
-define('APPROOT', dirname(__FILE__) . '/app');
+define('APPROOT', dirname(__FILE__).'/app');
 
 //Url Root
-define('URLROOT', 'http://localhost/shareposts');
+define('URLROOT', 'http://localhost:8000/my-simple-mvc');
 
 //Site Name
-define('SITENAME', 'SharePosts');
+define('SITENAME', 'MySimpleMVC');
 
 //App Version
 define('APPVERSION', '1.0.0');
+
+//Enviroment
+define('ENV', 'DEV'); //Values: DEV OR PROD

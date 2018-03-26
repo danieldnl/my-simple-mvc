@@ -11,7 +11,7 @@ class Router
      */
     public $routes = [
         'GET' => [],
-        'POST' => []
+        'POST' => [],
     ];
 
     /**
@@ -21,7 +21,7 @@ class Router
      */
     public static function load($file)
     {
-        $router = new static;
+        $router = new static();
 
         require $file;
 
@@ -53,11 +53,11 @@ class Router
     /**
      * Remove any numbers from the URI so the route matches.
      *
-     * @param  string $uri
+     * @param string $uri
      */
     public function parseUri($uri)
     {
-        return preg_replace("|([0-9]+)(?=[^\/]*)|", "{id}", $uri);
+        return preg_replace("|([0-9]+)(?=[^\/]*)|", '{id}', $uri);
     }
 
     /**
@@ -72,7 +72,7 @@ class Router
         $id = is_numeric(end($arr)) ? end($arr) : false;
         $uri = $this->parseUri($uri);
         if (!array_key_exists($uri, $this->routes[$requestType])) {
-            throw new \Exception("No route defined for this URI.");
+            throw new \Exception('No route defined for this URI.');
         }
         $params = explode('@', $this->routes[$requestType][$uri]);
         if ($id) {
@@ -91,14 +91,15 @@ class Router
      */
     protected function callAction($controller, $action, $param = [])
     {
-        $controller = "App\\Controllers\\{$controller}";
-        $controller = new $controller;
-        if (! method_exists($controller, $action)) {
+        $controller = "App\\controllers\\{$controller}";
+        $controller = new $controller();
+        if (!method_exists($controller, $action)) {
             throw new \Exception("Method {$action} does no exist.");
         }
         if ($param) {
             return $controller->$action($param);
         }
+
         return $controller->$action();
     }
 }
